@@ -15,10 +15,6 @@ public class EventCountServiceImpl implements EventCountService {
 
     @Override
     public Long getCount(int year, int month, int day, int hour){
-        try{
-            return eventCountRepository.getCount(year, month, day, hour);
-        }catch (InvalidDateException e){
-            throw e;
-        }
+        return eventCountRepository.getCount(year, month, day, hour);
     }
 }

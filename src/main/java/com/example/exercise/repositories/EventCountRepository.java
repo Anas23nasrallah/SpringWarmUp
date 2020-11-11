@@ -19,11 +19,22 @@ public class EventCountRepository {
 //    @Value("${db_url}")           //it disappears while testing, need to figure out why
 //    private String db_url;
 
+    private boolean isDateValid(int year, int month, int day, int hour){
+        return  (year == 2020 &&
+                month > 0 && month < 13 &&
+                day > 0 && day < 32 &&
+                hour > 0 && hour < 24);
+    }
+
     public EventCountRepository(SparkSession spark) {
         this.spark = spark;
     }
 
     public Long getCount(int year, int month, int day, int hour) throws InvalidDateException {
+
+        if( !isDateValid(year, month, day, hour)){
+            throw new InvalidDateException();
+        }
 
         String monthString = month < 10 ? "0" + month : Integer.toString(month);
         String dayString = day < 10 ? "0" + day : Integer.toString(day);
@@ -31,13 +42,11 @@ public class EventCountRepository {
 
         try{
             String url = db_url + year + "/" + monthString + "/" + dayString + "/" + hourString + "/*";
-            System.out.println(url);
-            System.out.println(spark);
             Dataset<Row> ecomm =  spark.read().parquet(url);
             ecomm.createOrReplaceTempView("ecomm");
             return ecomm.count();
         }catch (Exception e){
-            throw new InvalidDateException();
+            throw new RuntimeException();
         }
 
     }

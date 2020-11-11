@@ -19,12 +19,12 @@ public class EventCountController {
     @GetMapping("/publisher/event_count/{year}/{month}/{day}/{hour}")
     @ResponseBody
     public Long getCount(@PathVariable int year, @PathVariable int month, @PathVariable int day, @PathVariable int hour) throws InvalidDateException {
-        try{
+//        try{
             return eventCountService.getCount(year, month, day, hour);
-        } catch (InvalidDateException e){
-            System.out.println(e.getMessage());
-            return -1l;
-        }
+//        } catch (InvalidDateException e){
+//            System.out.println(e.getMessage());
+//            return -1l;
+//        }
     }
 
 }

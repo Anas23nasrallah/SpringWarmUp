@@ -51,7 +51,7 @@ public class EventCountServiceImplTest {
         int month = 11;
         int day = 6;
         int hour = 21;
-        when(eventCountRepository.getCount(year, month, day, hour)).thenThrow(new InvalidDateException());
+        when(eventCountRepository.getCount(year, month, day, hour)).thenThrow(InvalidDateException.class);
         eventCountService.getCount(year, month, day, hour);
     }
 
@@ -61,7 +61,7 @@ public class EventCountServiceImplTest {
         int month = 11;
         int day = 60;
         int hour = 21;
-        when(eventCountRepository.getCount(year, month, day, hour)).thenThrow(new InvalidDateException());
+        when(eventCountRepository.getCount(year, month, day, hour)).thenThrow(InvalidDateException.class);
         eventCountService.getCount(year, month, day, hour);
     }
 }

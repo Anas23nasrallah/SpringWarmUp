@@ -2,10 +2,13 @@ package com.example.exercise.repositories;
 
 import com.example.exercise.configurations.SparkConfigurations;
 import com.example.exercise.exceptions.InvalidDateException;
+import com.example.exercise.services.EventCountServiceImpl;
 import org.apache.spark.sql.SparkSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,11 +20,13 @@ public class EventCountRepositoryTest {
 
     EventCountRepository eventCountRepository;
 
+//    @Mock
     @Autowired
     SparkSession sparkSession;
 
     @Before
     public void setUp() throws Exception {
+//        MockitoAnnotations.initMocks(this);
         eventCountRepository = new EventCountRepository(sparkSession);
     }
 
